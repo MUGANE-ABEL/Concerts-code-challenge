@@ -31,13 +31,13 @@ class Band:
         return list(set(concert.venue for concert in self._concerts))
 
     def play_in_venue(self, venue, date):
+        # Create and return a new concert
         concert = Concert(date, self, venue)
         self._concerts.append(concert)
         return concert
 
     def all_introductions(self):
         return [concert.introduction() for concert in self._concerts]
-
 
 
 
@@ -141,4 +141,4 @@ class Concert:
         return self._venue.city == self._band.hometown
 
     def introduction(self):
-        return f"Hello {self._venue.city}!!!!! We are {self._band.name} and we're from {self._band.hometown}"
+        return f"Hello {self._venue.city}!!!! We are {self._band.name} and we're from {self._band.hometown}"
