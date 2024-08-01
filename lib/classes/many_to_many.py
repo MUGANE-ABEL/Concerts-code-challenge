@@ -36,9 +36,10 @@ class Band:
         return concert
 
     def all_introductions(self):
-        if not self._concerts:
-            return None
         return [concert.introduction() for concert in self._concerts]
+
+
+
 
 # venue.py
 class Venue:
@@ -66,14 +67,8 @@ class Venue:
     def city(self):
         return self._city
 
-    @city.setter
-    def city(self, value):
-        if not isinstance(value, str) or len(value) == 0:
-            raise ValueError("City must be a non-empty string.")
-        self._city = value
-
     def concerts(self):
-        return self._concerts if self._concerts else None
+        return self._concerts
 
     def bands(self):
         return list(set(concert.band for concert in self._concerts))
@@ -84,8 +79,12 @@ class Venue:
                 return concert
         return None
 
+
+
 # concert.py
 class Concert:
+    all = []
+
     def __init__(self, date, band, venue):
         if not isinstance(date, str) or len(date) == 0:
             raise ValueError("Date must be a non-empty string.")
@@ -99,6 +98,7 @@ class Concert:
         self._venue = venue
         self._band._concerts.append(self)
         self._venue._concerts.append(self)
+        Concert.all.append(self)
 
     @property
     def date(self):
