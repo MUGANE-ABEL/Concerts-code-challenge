@@ -41,6 +41,7 @@ class Band:
 
 
 
+
 # venue.py
 class Venue:
     def __init__(self, name, city):
@@ -66,6 +67,12 @@ class Venue:
     @property
     def city(self):
         return self._city
+
+    @city.setter
+    def city(self, value):
+        if not isinstance(value, str) or len(value) == 0:
+            raise ValueError("City must be a non-empty string.")
+        self._city = value
 
     def concerts(self):
         return self._concerts
